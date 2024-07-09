@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble_game</title>
+    <link rel="stylesheet" href="./css/output.css">
+</head>
+
+<body class="bg-slate-200">
+    <div class="main flex justify-center items-center h-[100vh] ">
+        <div class="child w-[80%] h-[90vh] bg-white shadow-[0px_5px_20px_10px_rgba(0,0,0,0.2)]">
+            <div class="nav bg-green-600 h-[80px] max-[726px]:h-[auto] w-[100%]  max-[726px]:py-4">
+                <div
+                    class="  max-[726px]:space-x-0  max-[726px]:space-y-4 flex justify-center items-center h-[100%] space-x-32 max-[726px]:flex-col">
+                    <div class="">
+                        <span class="text-white font-semibold text-2xl">Hit</span>
+                        <span class="hitTime ml-2 px-2 bg-white text-xl">0</span>
+                    </div>
+
+                    <div class="">
+                        <span class="text-white font-semibold text-2xl">Timer</span>
+                        <span class="ml-2 px-2 bg-white  text-xl" id="timer">60</span>
+                    </div>
+
+                    <div class="">
+                        <span class="text-white font-semibold text-2xl">Score</span>
+                        <span class="ml-2 px-2 bg-white  text-xl" id="scoreValue">0</span>
+                    </div>
+                </div>
+            </div>
+           
+            <div class=" main_div flex flex-wrap">
+            <!-- <div class="cursor-pointer w-12 h-12 bg-green-800 flex justify-center items-center rounded-full m-4">
+                <div class="text-white">5</div>
+            </div> -->
+            </div>
+        </div> 
+    </div>
+
+  <script>
+    var cullter = "";
+    function makeBubble(){
+    for(let i =1; i<=171; i++){
+        let = random_num = Math.floor(Math.random()*10)
+        cullter += `<div class="cursor-pointer w-12 h-12 bg-green-800 flex justify-center items-center rounded-full m-4">
+                <div class="text-white">${random_num}</div>
+            </div>`
+    }
+
+    const main_div = document.querySelector(".main_div");
+    main_div.innerHTML = cullter;
+    }
+    //  function for runTimer
+    var timer = 60;
+    function runTimer(){
+       var timerVal = setInterval(function (){
+            if(timer > 0){
+                timer--;
+                if(timer<10){
+                    document.querySelector("#timer").textContent = `0`+timer;
+                }else{
+                    document.querySelector("#timer").textContent = timer;  
+                }
+             
+            }else{
+                clearInterval(timerVal);
+            }
+        },1000)
+    }
+
+    // function for how many you hited
+     var hitNum = 0;
+    function hitVal(){
+     var rn = Math.floor(Math.random()*10);
+      hitNum = document.querySelector(".hitTime").textContent = rn;
+    }
+
+    // function for increase score
+      var score = 0;
+    function scoreVal(){
+        score += 10;
+        document.querySelector("#scoreValue").textContent = score;
+    }
+
+
+    const main_div = document.querySelector(".main_div");
+
+    main_div.addEventListener("click", function(e){
+       let target = Number(e.target.textContent); 
+       if(timer > 0){
+      if(target == hitNum){
+        scoreVal();
+        hitVal();
+        }
+      }
+    })
+     makeBubble();
+     runTimer();
+     hitVal();
+
+  </script>
+</body>
+</html>
